@@ -1,5 +1,6 @@
 /*
     POINTS TO REMEMBER:
+    0) suru ma chai existing arrays of object data lai chai useState bata store garne ani, initial data haru lai map garera display garne
     1) Project start garnu bhanda paila chai euta DUMMY OBJECT banayera tya static data enter garne
        ani tyo static data haru use garera chai Components haru banaune ani paxi static data lai dynamic data le replace garne
     2) parent -child = > pass props
@@ -30,8 +31,8 @@ function App() {
 
   const [contacts, setContacts] = useState(initialContacts);
 
-  const addContactData = (CustomObjectData) => {
-    setContacts([CustomObjectData, ...contacts]);
+  const addContactData = (receivedDatafromContactAdder) => {
+    setContacts([receivedDatafromContactAdder, ...contacts]);
   };
 
   return (
@@ -42,8 +43,8 @@ function App() {
 
       <div className='contact_list'>
         Contact List:
-        {contacts.map((receivedData) => (
-          <Contact data={receivedData} />
+        {contacts.map((receivedDatafromUseState) => (
+          <Contact data={receivedDatafromUseState} />
         ))}
       </div>
     </>
