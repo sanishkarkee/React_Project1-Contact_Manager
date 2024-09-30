@@ -9,6 +9,7 @@ const ContactAdder = (props) => {
     //  2)  custom OBJECT to store the entered data
     // A] click me ma press gare paxi ,user entered data ko euta CUSTOM OBJECT banauxa
     const contactData = {
+      id: Math.random(), //custom id banako because mapping/display garda id pass garnu parxa
       name: name,
       number: mobile,
       location: location,

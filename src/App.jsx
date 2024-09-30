@@ -19,20 +19,19 @@ import './styles/app.css';
 import { Component } from 'react';
 
 function App() {
-  const initialContacts = [
-    {
-      name: 'John',
-      number: '1111',
-      location: 'Nepal',
-    },
-    { name: 'Sanish', number: '2222', location: 'Australia' },
-    { name: 'Ram', number: '3333', location: 'USA' },
-  ];
+  const showLocalStorageData = JSON.parse(localStorage.getItem('sameidforall'));
 
-  const [contacts, setContacts] = useState(initialContacts);
+  //NOTE: all entered data localstorage ma stored xa. Localstorage na stored bhayeko data nai show hune ho bhane paxi chai localstorage ko data lai STATE ma save gara kei farak pardaina
+  const [contacts, setContacts] = useState(
+    showLocalStorageData ? showLocalStorageData : []
+  );
 
+  // ContactAdder.jsx ko data haru yaha aauxa
   const addContactData = (receivedDatafromContactAdder) => {
-    setContacts([receivedDatafromContactAdder, ...contacts]);
+    const allReceivedData = [receivedDatafromContactAdder, ...contacts];
+    setContacts(allReceivedData);
+
+    localStorage.setItem('sameidforall', JSON.stringify(allReceivedData));
   };
 
   return (
@@ -44,7 +43,10 @@ function App() {
       <div className='contact_list'>
         Contact List:
         {contacts.map((receivedDatafromUseState) => (
-          <Contact data={receivedDatafromUseState} />
+          <Contact
+            key={receivedDatafromUseState.id}
+            data={receivedDatafromUseState}
+          />
         ))}
       </div>
     </>
