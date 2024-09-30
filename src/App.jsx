@@ -15,8 +15,7 @@
 import { useState } from 'react';
 import ContactAdder from './components/ContactAdder';
 import Contact from './components/Contact';
-import './styles/app.css';
-import { Component } from 'react';
+import './styles/app.scss';
 
 function App() {
   const showLocalStorageData = JSON.parse(localStorage.getItem('sameidforall'));
@@ -34,6 +33,12 @@ function App() {
     localStorage.setItem('sameidforall', JSON.stringify(allReceivedData));
   };
 
+  // localstorage ra state ko data lai CLEAR garna lai
+  const clearAllContacts = () => {
+    localStorage.clear();
+    setContacts([]);
+  };
+
   return (
     <>
       <div className='contact_adder'>
@@ -48,6 +53,7 @@ function App() {
             data={receivedDatafromUseState}
           />
         ))}
+        <button onClick={clearAllContacts}>Clear all contacts</button>
       </div>
     </>
   );
